@@ -57,27 +57,26 @@ var randomTxt = 'random.txt'
 
 
 
-var chooseCommand = function(){
-    if (argument1 === 'my-tweets'){
-        myTweets()
-    }
 
-    if (argument1 === 'spotify-this-song'){
-        spotifyThisSong(argument2);
-    }
-
-    if(argument1 === 'movie-this'){
-        movieThis(argument2);
-    }
-    
-}
 
 var myTweets = function(arg2){
-    
+    client.get('statuses/user_timeline',function(error,tweets){
+    	if (error){
+    		console.log(error)
+    	} else {
+
+    		for(var i=0;i<20;i++){
+    			console.log('Tweet #'+i)
+    			console.log(tweets[i].created_at)
+    			console.log(tweets[i].text)
+    		}
+    		
+    	}
+    })
 }
 
 var spotifyThisSong = function(arg2){
-
+	
 }
 
 var movieThis = function(arg2){
@@ -97,3 +96,22 @@ var movieThis = function(arg2){
 // * If no song is provided then your program will default to "The Sign" by Ace of Base.
 // * `movie-this`
 // * `do-what-it-says`
+
+
+
+var chooseCommand = function(){
+    if (argument1 === 'my-tweets'){
+        myTweets()
+    }
+
+    if (argument1 === 'spotify-this-song'){
+        spotifyThisSong(argument2);
+    }
+
+    if(argument1 === 'movie-this'){
+        movieThis(argument2);
+    }
+    
+}
+
+chooseCommand();
